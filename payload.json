@@ -1,0 +1,9 @@
+{
+  "train_id": 0,
+  "current_timestamp": 0,
+  "sequence_number": 0,
+  "latest_detected_tag": 0,
+  "speed": 0,
+  "position": 0,
+  "is_go": false
+}
