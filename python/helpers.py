@@ -19,6 +19,8 @@ def decodePayload(str):
 
   return dict(zip(payloadKeys, values))
 
+def toJson(str):
+  return json.loads(str)
 
 def setSpeed(state, speed):
   if state :
@@ -36,8 +38,14 @@ def setLatestTag(speed, loc):
 
   if tag >= 212 and loc >=3162:
     loc,tag = 0
-    return tag, tag
+    return tag, loc
   else :
     return tag, round(loc,2)
 
-  
+def findNum(str):
+  for i in str:
+    if i.isdigit():
+        return i
+
+def getKey(dict):
+  return str(list(dict.keys())[0])

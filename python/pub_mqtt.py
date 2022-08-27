@@ -1,16 +1,11 @@
 # python 3.6
 from paho.mqtt import client as mqtt_client
 
-from helpers import getCurrentTime, encodePayload, setSpeed, setLatestTag
-
-location = 0
+from helpers import getCurrentTime, encodePayload, setSpeed, setLatestTag, findNum
 
 def publish(client, topic, payload):
-    msg_count = 0
-    global location
-
     #train id
-    payload['train_id'] = 1
+    payload['train_id'] = findNum(topic)
     #timestamp
     payload['current_timestamp'] = getCurrentTime()
     #speed
@@ -23,7 +18,6 @@ def publish(client, topic, payload):
     result = client.publish(topic, p)
     status = result[0]
     if status == 0:
-        print('')
+        print(f"Success {p}")
     else:
         print(f"Failed to send message to topic {topic}")
-    msg_count += 1

@@ -7,15 +7,15 @@ from sub_mqtt import subscribe
 from helpers import loadJson
 
 payload = loadJson('./payload.json')
-topic = 'train_1_info'
 
-def run():
+def run(train_id):
+  pub_topic = f"{train_id}_info"
+  sub_topic = [
+    f"{train_id}_go",
+    f"{train_id}_seq"
+  ]
   client = connect_mqtt()
-  #client.loop_start()
   while True:
     time.sleep(1)
-    publish(client, topic, payload)
-    subscribe(client, topic, payload)
-
-if __name__ == '__main__':
-    run()
+    publish(client, pub_topic, payload)
+    for x in range(len(sub_topic)): subscribe(client, sub_topic[x], payload)
