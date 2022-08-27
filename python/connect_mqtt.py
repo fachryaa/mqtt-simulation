@@ -1,13 +1,15 @@
 from paho.mqtt import client as mqtt_client
 import random
+from dotenv import dotenv_values
 
-broker = '103.162.253.242'
-port = 1883
+CONFIG = dotenv_values(".env")
 
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
-username = 'refe'
-password = 'Tr4N5F0Rm3R'
+broker = CONFIG['MQTT_HOST']
+port = int(CONFIG['MQTT_PORT'])
+username = CONFIG['MQTT_USERNAME']
+password = CONFIG['MQTT_PASSWORD']
 
 def connect_mqtt():
     def on_connect(client, userdata, flags, rc):
